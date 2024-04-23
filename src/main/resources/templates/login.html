@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html data-bs-theme="dark" lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Вход/Регистрация</title>
+</head>
+
+<head th:insert="blocks/head :: head"></head>
+
+<body>
+
+<div th:insert="blocks/nav :: nav"></div>
+<hr>
+<hr>
+<hr>
+<main class="page login-page mt-5">
+    <section class="clean-block clean-form dark">
+        <div class="container">
+
+            <div th:if="${param.error}" class="row">
+                <div class="col"></div>
+                <div class="col">
+                    <div class="alert alert-light text-center" role="alert">
+                        <strong>Некорректный ввод логина или пароля!</strong>
+                    </div>
+                </div>
+                <div class="col"></div>
+            </div>
+            <div th:if="${message}" class="row">
+                <div class="col"></div>
+                <div class="col">
+                    <div class="alert alert-light text-center" role="alert">
+                        <strong th:text="${message}"></strong>
+                    </div>
+                </div>
+                <div class="col"></div>
+            </div>
+
+            <div class="row">
+                <div class="col"></div>
+                <div id="loginBlock" class="col">
+                    <form method="post" action="/login">
+                        <div class="mb-3">
+                            <input class="form-control" type="text" placeholder="Логин" required name="username"
+                                   minlength="4">
+                        </div>
+                        <div class="mb-3">
+                            <input id="login_password" class="form-control" type="password"
+                                   placeholder="Пароль" required name="password" minlength="8">
+                        </div>
+                        <a class="btn btn-warning w-100 mb-3" onclick="loginPasswordChange()">Показать/скрыть пароль</a>
+                        <button class="btn btn-warning w-100 mb-3" type="submit">Вход</button>
+                        <a class="btn btn-warning w-100 mb-3" onclick="regBlockActive()">Перейти на регистрацию</a>
+                    </form>
+                </div>
+                <div class="col"></div>
+            </div>
+
+            <div class="row">
+                <div class="col"></div>
+                <div id="regBlock" class="col">
+                    <form method="post" action="/reg">
+                        <div class="mb-3">
+                            <input class="form-control" type="text" placeholder="ФИО" required name="fio" minlength="4">
+                        </div>
+                        <div class="mb-3">
+                            <input class="form-control" type="text" placeholder="Логин" required name="username"
+                                   minlength="4">
+                        </div>
+                        <div class="mb-3">
+                            <input id="reg_password" class="form-control" type="password" placeholder="Пароль" required name="password"
+                                   minlength="8">
+                        </div>
+                        <a class="btn btn-warning w-100 mb-3" onclick="regPasswordChange()">Показать/скрыть пароль</a>
+                        <button class="btn btn-warning w-100 mb-3" type="submit">Регистрация</button>
+                        <a class="btn btn-warning w-100 mb-3" onclick="loginBlockActive()">Перейти на вход</a>
+                    </form>
+                </div>
+                <div class="col"></div>
+            </div>
+
+        </div>
+    </section>
+</main>
+
+
+<script th:inline="javascript" type="text/javascript">
+    let loginBlock = document.getElementById("loginBlock");
+    let regBlock = document.getElementById("regBlock");
+
+    var login = /*[[${login}]]*/ true;
+    var reg = /*[[${reg}]]*/ true;
+
+    function start() {
+        if (login === null && reg === null) {
+            login = true;
+        }
+        if (login === true) {
+            loginBlock.style.display = 'block';
+            regBlock.style.display = 'none';
+        }
+        if (reg === true) {
+            loginBlock.style.display = 'none';
+            regBlock.style.display = 'block';
+        }
+    }
+
+    start();
+
+    function regBlockActive() {
+        loginBlock.style.display = 'none';
+        regBlock.style.display = 'block';
+    }
+
+    function loginBlockActive() {
+        loginBlock.style.display = 'block';
+        regBlock.style.display = 'none';
+    }
+
+    function loginPasswordChange() {
+        let password = document.getElementById("login_password");
+        if (password.getAttribute('type') === 'password') {
+            password.setAttribute('type', 'text');
+        } else if (password.getAttribute('type') === 'text') {
+            password.setAttribute('type', 'password');
+        }
+    }
+
+    function regPasswordChange() {
+        let password = document.getElementById("reg_password");
+        if (password.getAttribute('type') === 'password') {
+            password.setAttribute('type', 'text');
+        } else if (password.getAttribute('type') === 'text') {
+            password.setAttribute('type', 'password');
+        }
+    }
+</script>
+
+<script src="/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

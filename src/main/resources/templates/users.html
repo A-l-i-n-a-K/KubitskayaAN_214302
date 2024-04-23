@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html data-bs-theme="dark" lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Пользователи</title>
+</head>
+
+<head th:insert="blocks/head :: head"></head>
+
+<body>
+<div th:insert="blocks/nav :: nav"></div>
+<hr>
+<hr>
+<hr>
+<main class="page catalog-page mt-5">
+    <section class="clean-block clean-catalog dark">
+        <div class="container">
+            <div class="block-heading text-center mb-5">
+                <h2 class="text-light">Пользователи</h2>
+            </div>
+
+            <div class="content rounded p-3">
+                <form th:each="i : ${users}" th:action="${'/users/' + i.id + '/edit'}" method="post" class="mb-2"
+                      th:if="${i.id != user.id}">
+                    <div class="row">
+                        <div class="col">
+                            <input class="form-control" type="text" readonly th:value="${i.fio}">
+                        </div>
+                        <div class="col">
+                            <select name="role" required class="form-select">
+                                <option th:each="role : ${roles}" th:value="${role}" th:label="${role.name}"
+                                        th:selected="${role == i.role}"></option>
+                            </select>
+                        </div>
+                        <div class="col-auto">
+                            <button class="btn btn-warning" type="submit">Обновить</button>
+                        </div>
+                        <div class="col-auto">
+                            <a th:href="${'/users/' + i.id + '/delete'}" class="btn btn-danger">Удалить</a>
+                        </div>
+                        <div th:unless="${i.file.isEmpty()}" class="col-auto">
+                            <a th:href="${'/img/' + i.file}" target="_blank" class="btn btn-secondary">Заявка</a>
+                        </div>
+                        <div th:unless="${i.file.isEmpty()}" class="col-auto">
+                            <a th:href="${'/users/' + i.id + '/app'}" class="btn btn-secondary">Одобрить заявку</a>
+                        </div>
+                        <div th:if="${i.enabled == false}" class="col-auto">
+                            <a th:href="${'/users/' + i.id + '/enabled'}" class="btn btn-success">Одобрить регистрацию</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </section>
+</main>
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+</body>
+
+</html>

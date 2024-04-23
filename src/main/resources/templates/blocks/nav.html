@@ -1,0 +1,24 @@
+<nav th:fragment="nav" class="navbar navbar-expand-lg fixed-top bg-dark clean-navbar navbar-light">
+    <div class="container-fluid">
+        <a class="navbar-brand logo text-white fs-3" href="/">FitQuest</a>
+        <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1">
+            <span class="visually-hidden">Toggle navigation</span>
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navcol-1">
+            <ul class="navbar-nav ms-auto fs-5">
+                <li th:if="${role == 'NOT'}" class="nav-item"><a class="nav-link text-white" href="/about">Главная стрница</a></li>
+
+                <li th:if="${role == 'ADMIN'}" class="nav-item"><a class="nav-link text-white" href="/users">Пользователи</a></li>
+                <li th:if="${role == 'ADMIN'}" class="nav-item"><a class="nav-link text-white" href="/category">Категории</a></li>
+                <li th:if="${role == 'ADMIN'}" class="nav-item"><a class="nav-link text-white" href="/stats">Статистика</a></li>
+
+                <li th:if="${role == 'MANAGER' or role == 'USER'}" class="nav-item"><a class="nav-link text-white" href="/trainings">Тренировки</a></li>
+
+                <li th:if="${role == 'MANAGER' or role == 'USER'}" class="nav-item"><a class="nav-link text-white" href="/profile">Профиль</a></li>
+                <li th:if="${role == 'NOT'}" class="nav-item"><a class="btn btn-warning rounded-5 ms-5" href="/login">Вход/Регистрация</a></li>
+                <li th:if="${role != 'NOT'}" class="nav-item"><a class="btn btn-warning rounded-5 ms-5" href="/logout">Выход</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>

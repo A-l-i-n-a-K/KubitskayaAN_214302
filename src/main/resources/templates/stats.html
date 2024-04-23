@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html data-bs-theme="dark" lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Статистика</title>
+</head>
+
+<head th:insert="blocks/head :: head"></head>
+
+<body>
+<div th:insert="blocks/nav :: nav"></div>
+<hr>
+<hr>
+<hr>
+<main class="page catalog-page mt-5">
+    <section class="clean-block clean-catalog dark">
+        <div class="container">
+            <div class="block-heading text-center mb-5">
+                <h2 class="text-light">Статистика</h2>
+            </div>
+
+            <div class="text-center mb-3">
+                <a onclick="generatePDF()" class="btn btn-warning w-25">Отчет</a>
+            </div>
+
+            <div class="row">
+                <div class="col"></div>
+                <div class="col-8">
+                    <div id="generatePDF" class="row mb-5">
+                        <div class="col-12 mb-2">
+                            <div id="drawTopWin" style="height: 400px"></div>
+                        </div>
+                        <div class="col-12 mb-2">
+                            <div id="drawGender" style="height: 400px"></div>
+                        </div>
+                        <div class="col-12 mb-2">
+                            <div id="drawExp" style="height: 400px"></div>
+                        </div>
+                        <div class="col-12 mb-2">
+                            <div id="drawRatio" style="height: 400px"></div>
+                        </div>
+                        <div class="col-12 mb-2">
+                            <div id="drawWin" style="height: 400px"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col"></div>
+            </div>
+
+        </div>
+    </section>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
+        integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
+        crossOrigin="anonymous" referrerpolicy="no-referrer"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script th:inline="javascript" type="text/javascript">
+    var genderString = /*[[${genderString}]]*/ [];
+    var genderInt = /*[[${genderInt}]]*/ [];
+    var medExp = /*[[${medExp}]]*/ 0;
+    var medExpMin = /*[[${medExpMin}]]*/ 0;
+    var medExpMax = /*[[${medExpMax}]]*/ 0;
+    var medRatio = /*[[${medRatio}]]*/ 0;
+    var medRatioMin = /*[[${medRatioMin}]]*/ 0;
+    var medRatioMax = /*[[${medRatioMax}]]*/ 0;
+    var medWin = /*[[${medWin}]]*/ 0;
+    var medWinMin = /*[[${medWinMin}]]*/ 0;
+    var medWinMax = /*[[${medWinMax}]]*/ 0;
+    var expString = /*[[${expString}]]*/ [];
+    var expFloat = /*[[${expFloat}]]*/ [];
+
+    function generatePDF() {
+        html2pdf(document.getElementById('generatePDF'));
+    }
+</script>
+<script src="/js/stats.js"></script>
+
+<script src="/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

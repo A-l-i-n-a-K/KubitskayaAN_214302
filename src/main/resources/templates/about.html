@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html data-bs-theme="dark" lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Главная страница</title>
+</head>
+
+<head th:insert="blocks/head :: head"></head>
+
+<body>
+<div th:insert="blocks/nav :: nav"></div>
+<hr>
+<hr>
+<hr>
+<main class="page catalog-page mt-5">
+    <section class="clean-block clean-catalog dark">
+        <div class="container">
+            <div class="block-heading text-center mb-5">
+                <h2 class="text-light">Главная страница</h2>
+            </div>
+
+            <div class="bg-dark p-3 rounded-5 mb-5">
+                <p class="fs-4" align="justify">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste minus molestiae odit repudiandae
+                    similique voluptates? Accusantium, molestiae, vitae. Ab at aut, consectetur consequuntur delectus
+                    doloremque ea eum facere molestiae nam.
+                </p>
+                <p class="fs-4" align="justify">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aliquid architecto corporis
+                    distinctio dolor doloremque eaque iusto maxime officia porro, quas, quisquam reiciendis rem tempora
+                    tempore velit, voluptas? Inventore, velit.
+                </p>
+                <p class="fs-4" align="justify">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ad cupiditate dolorum explicabo impedit
+                    molestiae, nulla qui repudiandae, totam vel vero voluptas. Alias eum optio placeat quibusdam quis
+                    sapiente suscipit?
+                </p>
+                <hr>
+                <iframe allowfullscreen frameborder="0"
+                        src="https://www.youtube.com/embed/-qAgUKRkodE?si=kHeIixb70_uzZx7X"
+                        width="100%" height="700px"></iframe>
+            </div>
+
+        </div>
+    </section>
+</main>
+
+<script src="/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

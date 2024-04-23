@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html data-bs-theme="dark" lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Категории</title>
+</head>
+
+<head th:insert="blocks/head :: head"></head>
+
+<body>
+<div th:insert="blocks/nav :: nav"></div>
+<hr>
+<hr>
+<hr>
+<main class="page catalog-page mt-5">
+    <section class="clean-block clean-catalog dark">
+        <div class="container">
+            <div class="block-heading text-center mb-5">
+                <h2 class="text-light">Категории</h2>
+            </div>
+
+            <form action="/category/add" method="post">
+                <div class="row">
+                    <div class="col">
+                        <input type="text" required class="form-control" name="name" placeholder="Название">
+                    </div>
+                    <div class="col">
+                        <input type="number" required class="form-control" name="quantity" placeholder="Количество"
+                               min="1" step="1">
+                    </div>
+                    <div class="col-auto">
+                        <button class="btn btn-warning" type="submit">Добавить</button>
+                    </div>
+                </div>
+            </form>
+            <hr>
+            <form th:each="i : ${categories}" th:action="${'/category/' + i.id + '/edit'}" method="post" class="mb-2">
+                <div class="row">
+                    <div class="col">
+                        <input type="text" required class="form-control" name="name" placeholder="Название" th:value="${i.name}">
+                    </div>
+                    <div class="col">
+                        <input type="number" required class="form-control" name="quantity" placeholder="Количество"
+                               min="1" step="1" th:value="${i.quantity}">
+                    </div>
+                    <div class="col-auto">
+                        <button class="btn btn-warning" type="submit">Обновить</button>
+                    </div>
+                    <div class="col-auto">
+                        <a th:href="${'/category/' + i.id + '/delete'}" class="btn btn-danger">Удалить</a>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </section>
+</main>
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+</body>
+
+</html>

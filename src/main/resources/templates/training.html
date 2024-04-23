@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html data-bs-theme="dark" lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Тренировка</title>
+</head>
+
+<head th:insert="blocks/head :: head"></head>
+
+<body>
+<div th:insert="blocks/nav :: nav"></div>
+<hr>
+<hr>
+<hr>
+<main class="page catalog-page mt-5">
+    <section class="clean-block clean-catalog dark">
+        <div class="container">
+            <div class="block-heading text-center mb-5">
+                <h2 class="text-light" th:text="${training.dateAndTime}"></h2>
+            </div>
+
+            <div class="text-center mb-3">
+                <a href="/trainings" class="btn btn-warning w-25">Назад</a>
+            </div>
+
+            <div th:unless="${training.signs.isEmpty()}" class="row bg-dark p-3 rounded-3">
+                <div th:each="i : ${training.signs}" class="col-3 text-center">
+                    <img th:src="${'/img/' + i.owner.photo}" style="max-width: 100%;max-height: 250px">
+                    <p class="fs-4 mb-1" th:text="${'ФИО: ' + i.owner.fio}"></p>
+                    <p class="fs-4 mb-1" th:text="${'Статус: ' + i.status.name}"></p>
+                    <p th:if="${i.weight != 0}" class="fs-4 mb-1" th:text="${'Вес: ' + i.weight}"></p>
+                    <p th:if="${i.pulse != 0}" class="fs-4 mb-1" th:text="${'Пульс: ' + i.pulse}"></p>
+                    <div th:if="${i.status.name() == 'WAITING'}">
+                        <form th:action="${'/trainings/' + trainingId + '/signs/' + i.id + '/passed'}" method="post">
+                            <input type="number" required class="form-control mb-2" name="weight" placeholder="Вес"
+                                   min="0.01" step="0.01">
+                            <input type="number" required class="form-control mb-2" name="pulse" placeholder="Пульс"
+                                   min="1" step="1">
+                            <button type="submit" class="btn btn-success w-100 mb-2">Пройдено</button>
+                        </form>
+                        <a th:href="${'/trainings/' + trainingId + '/signs/' + i.id + '/not'}"
+                           class="btn btn-warning w-100 mb-2">Не пройдено</a>
+                    </div>
+                    <a th:href="${'/trainings/' + trainingId + '/user/' + i.owner.id}"
+                       class="btn btn-secondary w-100 mb-2">Профиль</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+</main>
+
+<script src="/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
